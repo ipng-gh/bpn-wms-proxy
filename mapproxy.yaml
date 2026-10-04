@@ -1,0 +1,32 @@
+services:
+  demo:
+  wms:
+    md:
+      title: Peta Dasar ATR/BPN
+      abstract: WMS Peta Dasar ATR/BPN
+
+layers:
+  - name: petadasar
+    title: Peta Dasar ATR/BPN
+    sources: [petadasar_cache]
+
+caches:
+  petadasar_cache:
+    grids: [webmercator]
+    sources: [petadasar_source]
+    format: image/png
+
+sources:
+  petadasar_source:
+    type: tile
+    url: https://petadasar.atrbpn.go.id/wms/?d=%(x)s/%(y)s/%(z)s/2
+    grid: webmercator
+    http:
+      headers:
+        Referer: https://petadasar.atrbpn.go.id/
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+
+grids:
+  webmercator:
+    base: GLOBAL_WEBMERCATOR
+    srs: 'EPSG:3857'
